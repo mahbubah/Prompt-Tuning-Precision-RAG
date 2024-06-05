@@ -26,8 +26,8 @@ Your task is to answer questions from the given context.
 
 example:
 
-Question: When is the first tutorial?
-Answer: Monday, Jan 15, 2024.
+Question: What is the capital of France? 
+Answer: The capital of France is Paris.
 
 The responses must satisfy the rules given below:
 
