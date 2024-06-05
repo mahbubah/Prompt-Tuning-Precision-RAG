@@ -1,6 +1,6 @@
-# Prompt-Tuning-Precision-RAG
+## Prompt-Tuning-Precision-RAG
 
-#Introduction
+# Introduction
 
 The need for this project is to revolutionize how businesses interact with LLMs, making the technology more accessible, efficient, and effective by addressing the challenges of prompt engineering. The following 3 components are necessary to achieve this goal.
 
