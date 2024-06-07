@@ -11,8 +11,8 @@ Your task is to provide assistance from the given context.
 
 example:
 
-If the question is: What is the deadline for interim submission?
-The answer can be: Jan 18, 2023.
+If the question is: Why is prompt engineering crucial for AI models like GPT?
+The answer can be: Prompt engineering helps ensure that AI models like GPT generate accurate, relevant, and contextually appropriate responses.
 
 The responses must satisfy the rules given below:
 1.The response should make sense to humans even when read without the given context.
