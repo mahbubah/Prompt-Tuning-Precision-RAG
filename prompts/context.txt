@@ -21,3 +21,21 @@ prompts, we can empower users to interact more effectively with NLP systems.
 Through fine-tuning models and leveraging semantic understanding, we aim to generate prompts 
 that enable efficient and accurate retrieval of information, ultimately enhancing the user 
 experience and driving progress in the field of natural language processing.
+
+AI models like GPT are incredibly versatile but can sometimes generate undesirable or inappropriate responses. 
+Prompt engineering involves crafting prompts in such a way that it encourages the model to generate responses
+that are accurate, relevant, and contextually appropriate.
+
+Language models can generate text based on the input they receive, 
+but they don't inherently understand context or nuance in the way humans do. 
+Prompt engineering can involve providing specific cues or constraints to guide the model 
+towards generating outputs that align with certain criteria, 
+such as being factually accurate, respectful, or creative.
+
+Prompt engineering can also involve fine-tuning a pre-trained language model 
+on specific tasks or domains. By providing examples or prompts related to a particular task, 
+the model can learn to generate more accurate and relevant responses for that task.
+
+Prompt engineering is also important from an ethical standpoint. 
+By carefully crafting prompts, researchers and developers can help mitigate the risk of 
+AI models generating biased, harmful, or inappropriate content.
