@@ -1,5 +1,4 @@
 import requests
-import json
 import os
 import weaviate
 from weaviate.embedded import EmbeddedOptions
@@ -14,11 +13,11 @@ from langchain.schema.output_parser import StrOutputParser
 from datasets import Dataset
 from ragas import evaluate
 from ragas.metrics import (
-    context_utilization,
-    context_recall,
     faithfulness,
     answer_relevancy,
+    context_recall,
     context_precision,
+    #context_utilization,
 )
 
 from dotenv import load_dotenv,find_dotenv
@@ -63,10 +62,12 @@ def file_reader(path: str, ) -> str:
         system_message = f.read()
     return system_message
 
-# Load test prompts from JSON file
-def load_test_prompts(file_path):
-    with open(file_path, 'r') as file:
-        data = json.load(file)
+import json
+
+def file_reader_json(path: str) -> list:
+    fname = os.path.join(path)
+    with open(fname, 'r') as f:
+        data = json.load(f)
     return data
 
 
@@ -94,19 +95,7 @@ def test_prompts():
             | StrOutputParser() 
         )
 
-
-        # Test prompts file path
-        test_prompts_file = "../prompts/automatically-generated-test-prompts.txt"
-
-        # Load test prompts data
-        test_cases = load_test_prompts(test_prompts_file)
-
-        # Verify the data structure
-        #print(type(test_cases))  # Should be list
-        #print(test_cases)         # Should be list of dictionaries
-
-
-        #test_cases = file_reader("../prompts/automatically-generated-test-prompts.txt")
+        test_cases = file_reader_json("../prompts/automatically-generated-test-prompts.txt")
 
         questions = []
         ground_truths = []
@@ -123,37 +112,39 @@ def test_prompts():
             contexts.append([docs.page_content for docs in retriever.get_relevant_documents(query)])
 
         # To dict
-        data = {
+        '''data = {
             "question": questions, # list 
             "answer": answers, # list
             "contexts": contexts, # list list
             "ground_truths": ground_truths # list Lists
-        }
+        }'''
+
+
+# Combine questions, answers, contexts, and ground_truths into a list of dictionaries
+    data = []
+    for question, answer, context, ground_truth in zip(questions, answers, contexts, ground_truths):
+        data.append({
+        "question": question,
+        "answer": answer,
+        "contexts": context,
+        "ground_truth": ground_truth  # Add ground_truth column
+    })
 
         # Convert dict to dataset
         dataset = Dataset.from_dict(data)
 
-        '''result = evaluate(
+        result = evaluate(
             dataset = dataset, 
             metrics=[
+                #context_utilization,
                 context_precision,
                 context_recall,
                 faithfulness,
                 answer_relevancy,
             ],
-        )'''
-    result = evaluate(
-        dataset=dataset, 
-        metrics=[
-            context_utilization,
-            context_recall,
-            faithfulness,
-            answer_relevancy,
-        ],
-    )
+        )
 
-
-    return result
+        return result
     
 if __name__ == "__main__":
     test_prompts()
