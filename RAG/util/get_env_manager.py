@@ -24,7 +24,7 @@ def _get_vectordb_keys() -> VECTORDB_KEYS:
     return VECTORDB_KEYS()
 
 
-def get_env_manager() -> dict:
+def get_envnt_manager() -> dict:
     openai_keys = _get_openai_keys().__dict__
     vectordb_keys = _get_vectordb_keys().__dict__
 

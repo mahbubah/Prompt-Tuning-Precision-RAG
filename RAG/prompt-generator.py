@@ -93,7 +93,7 @@ def main(num: str):
 
     def save_txt(generate_prompts) -> None:
         # Specify the file path
-        file_path = "/home/mahbubah/Desktop/week-7/Prompt-Tuning-Precision-RAG/prompts/automatically-generated-prompts2.txt"
+        file_path = "/home/mahbubah/Desktop/week-7/Prompt-Tuning-Precision-RAG/prompts/automatically-generated-prompts.txt"
         with open(file_path, 'w') as txt_file:
             txt_file.write(generate_prompts)
         

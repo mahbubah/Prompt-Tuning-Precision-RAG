@@ -4,9 +4,13 @@ import sys
 from openai import OpenAI
 from math import exp
 import numpy as np
-#from utility.env_manager import get_env_manager
-#from RAG import prompt_generator
+#from util.env_manager import get_env_manager
+from util import get_env_manager
 
+#import prompt_generator
+
+env_manager = get_env_manager.get_envnt_manager()
+client = OpenAI(api_key=env_manager['openai_keys']['OPENAI_API_KEY'])
 
 from dotenv import load_dotenv
 
@@ -15,7 +19,6 @@ load_dotenv()
 
 openai_api_key = os.getenv("OPENAI_API_KEY") 
 vectordb_keys = os.getenv("VECTORDB_MODEL") 
-client = OpenAI(api_key=openai_api_key)
 
 def get_completion(
     messages: list[dict[str, str]],
@@ -64,6 +67,7 @@ def file_reader(path: str, ) -> str:
     return system_message
 
 
+
 '''
 import os
 
@@ -95,7 +99,7 @@ def evaluate(prompt: str, user_message: str, context: str, use_test_data: bool =
                 "content": prompt.replace("{Context}", context).replace("{Question}", user_message)
             }
         ],
-        model=vectordb_keys,
+        model=env_manager['vectordb_keys']['VECTORDB_MODEL'],
         logprobs=True,
         top_logprobs=1,
     )
@@ -117,7 +121,7 @@ def evaluate(prompt: str, user_message: str, context: str, use_test_data: bool =
 
 if __name__ == "__main__":
     context_message = file_reader("../prompts/context.txt")
-    prompt_message = file_reader("../prompts/prompt-generating-prompt.txt")
+    prompt_message = file_reader("../prompts/generic-evaluation-prompt.txt")
     context = str(context_message)
     prompt = str(prompt_message)
     
